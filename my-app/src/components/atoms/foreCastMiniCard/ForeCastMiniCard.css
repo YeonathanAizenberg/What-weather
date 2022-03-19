@@ -1,0 +1,15 @@
+.card-wrapper {
+    border: 2px solid;
+    width: 15%;
+    height: 15vh;
+    margin: 0px 1%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+@media only screen and (max-width: 345px) {
+    .card-wrapper{
+        font-size: smaller;
+    }
+}
