@@ -12,16 +12,15 @@ function SearchBar() {
     const [city,setCity] = useState("Tel Aviv");
     
     const searchCityWeatherInfo = () => {
-        console.log(city)
-        // dispatch(fetchSearchDataRequest());
-        // locationCompleteSearch(city)
-        // .then(response => {
-        //     dispatch(fetchSearchDataSuccess(response.data));
-        //     localStorage.setItem("currentCityKey", response.data.key)
-        //     localStorage.setItem("currentCityName", response.data.LocalizedName)
-        // }).catch(error => {
-        //     dispatch(fetchSearchDataError(error));
-        // })
+        dispatch(fetchSearchDataRequest());
+        locationCompleteSearch(city)
+        .then(response => {
+            dispatch(fetchSearchDataSuccess(response.data));
+            localStorage.setItem("currentCityKey", response.data.key)
+            localStorage.setItem("currentCityName", response.data.LocalizedName)
+        }).catch(error => {
+            dispatch(fetchSearchDataError(error));
+        })
     }
 
     return (

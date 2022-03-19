@@ -9,35 +9,36 @@ import './MainPage.css';
 
 const MainPage = () => {
     const dispatch = useDispatch();
-    const data = useSelector(state => state?.getData?.data[0])
-    const foreCastData = useSelector(state => state?.getForeCastData?.data[0])
 
-    // Uncomment this line to have the Data From the APi
-    // useEffect(() => {
-    //     dispatch(fetchDataRequest());
-    //     getCurrentWeather()
-    //     .then(response => {
-    //         dispatch(fetchDataSuccess(response.data));
-    //     }).catch(error => {
-    //         dispatch(fetchDataError(error));
-    //     })
-    // },[])
+    const data = useSelector(state => state?.getData)
+    // const loading = useSelector(state => state?.getData.loading)
+    const foreCastData = useSelector(state => state?.getForeCastData)
 
-    // Uncomment this line to have the ForeCast Data From the APi
-    // useEffect(() => {
-    //     dispatch(fetchForecastDataRequest());
-    //     fiveDaysForeCast()
-    //     .then(response => {
-    //         dispatch(fetchForecastDataSuccess(response.data));
-    //     }).catch(error => {
-    //         dispatch(fetchForecastDataError(error));
-    //     })
-    // },[])
+    useEffect(() => {
+        dispatch(fetchDataRequest());
+        getCurrentWeather()
+        .then(response => {
+            dispatch(fetchDataSuccess(response.data));
+        }).catch(error => {
+            dispatch(fetchDataError(error));
+        })
+    },[])
+
+    useEffect(() => {
+        dispatch(fetchForecastDataRequest());
+        fiveDaysForeCast()
+        .then(response => {
+            dispatch(fetchForecastDataSuccess(response.data));
+        }).catch(error => {
+            dispatch(fetchForecastDataError(error));
+        })
+    },[])
 
     return (
         <div className="main-page-wrapper">
             <SearchBar/>
             <MainCard 
+                // loading={loading}
                 data={data} 
                 foreCastData={foreCastData}
             />

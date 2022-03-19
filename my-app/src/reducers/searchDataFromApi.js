@@ -1,5 +1,5 @@
 let initialState = {
-    loading: false,
+    loading: true,
     data: [{
         "isTheMockSearchDataState": true,
         "Version": 1,
