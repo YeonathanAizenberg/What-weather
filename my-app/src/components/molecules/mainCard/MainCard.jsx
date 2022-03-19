@@ -9,15 +9,27 @@ import './MainCard.css';
 
 function MainCard({data, foreCastData}) {
     const [favoriteCities, setFavoriteCities] = useState([localStorage.getItem("favCity")])
+    const [isFavorite, setIsFavorite] = useState(false)
     var locationCityName = localStorage.getItem("currentCityName") ? localStorage.getItem("currentCityName") : "Tel Aviv"
     console.log("data",data)
     console.log("foreCastData",foreCastData.DailyForecasts)
 
     const updateFavoriteCities = (newCity) => {
-        localStorage.setItem("favCity", [...favoriteCities, newCity])
-        setFavoriteCities(...favoriteCities, newCity)
+        const newCityInfo = (newCity.EpochTime, newCity.WeatherText, newCity.Temperature.Metric.Value)
+        setIsFavorite(true)
+        localStorage.setItem("favCity", ...favoriteCities, newCityInfo)
+        setFavoriteCities(...favoriteCities, newCityInfo)
+        checkIfFavorite()
     }
 
+    const checkIfFavorite = () => {
+        if(favoriteCities?.includes(locationCityName)) {
+            return faHeart
+        } else {
+            return faHeartEmpty
+        }
+    }
+console.log(data)
     return (
         <>
             <div className="data-container-box">
@@ -38,9 +50,9 @@ function MainCard({data, foreCastData}) {
                     </div>
                     <div className='add-to-favorites-wrapper'>
                         <div>
-                            <FontAwesomeIcon icon={faHeartEmpty} font-size={"4vh"}/>
+                            <FontAwesomeIcon icon={checkIfFavorite()} fontSize={"4vh"}/>
                         </div>
-                        <Button onClick={() => updateFavoriteCities("data.city")}>
+                        <Button disabled={isFavorite} onClick={() => updateFavoriteCities(data)}>
                             Add To Favorites
                         </Button>
                     </div>
