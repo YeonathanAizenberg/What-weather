@@ -4,14 +4,14 @@ import './Favorites.css'
 
 const Favorites = () => {
 
-    const [favoriteCities, setFavoriteCities] = useState([localStorage.getItem("favCity")])
-console.log(favoriteCities)
+    const favoriteCities =  Array(JSON.parse(localStorage.getItem("favCity")))
+
     return (
         <div className="fav-city-cards-wrapper">
             {favoriteCities[0] !== null ? favoriteCities?.map((city, index) =>
                 <CityMiniCard 
                     key={city?.Rank || index} 
-                    city={city?.LocalizedName} 
+                    city={city?.name} 
                     weather={city?.weather} 
                     temp={city?.temp} 
                 />
