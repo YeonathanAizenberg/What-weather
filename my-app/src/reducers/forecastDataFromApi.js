@@ -1,7 +1,6 @@
 let initialState = {
     loading: false,
     data: [{
-        "isTheMockForeCastDataState": true,
         "Headline": {
             "EffectiveDate": "2022-03-23T01:00:00+02:00",
             "EffectiveEpochDate": 1647990000,
@@ -10,56 +9,23 @@ let initialState = {
             "Category": "rain",
             "EndDate": "2022-03-23T13:00:00+02:00",
             "EndEpochDate": 1648033200,
-            "MobileLink": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?lang=en-us",
-            "Link": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?lang=en-us"
+            "MobileLink": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?unit=c&lang=en-us",
+            "Link": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?unit=c&lang=en-us"
         },
         "DailyForecasts": [
-            {
-                "Date": "2022-03-18T07:00:00+02:00",
-                "EpochDate": 1647579600,
-                "Temperature": {
-                    "Minimum": {
-                        "Value": 53,
-                        "Unit": "F",
-                        "UnitType": 18
-                    },
-                    "Maximum": {
-                        "Value": 60,
-                        "Unit": "F",
-                        "UnitType": 18
-                    }
-                },
-                "Day": {
-                    "Icon": 4,
-                    "IconPhrase": "Intermittent clouds",
-                    "HasPrecipitation": false
-                },
-                "Night": {
-                    "Icon": 39,
-                    "IconPhrase": "Partly cloudy w/ showers",
-                    "HasPrecipitation": true,
-                    "PrecipitationType": "Rain",
-                    "PrecipitationIntensity": "Light"
-                },
-                "Sources": [
-                    "AccuWeather"
-                ],
-                "MobileLink": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?lang=en-us",
-                "Link": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?lang=en-us"
-            },
             {
                 "Date": "2022-03-19T07:00:00+02:00",
                 "EpochDate": 1647666000,
                 "Temperature": {
                     "Minimum": {
-                        "Value": 51,
-                        "Unit": "F",
-                        "UnitType": 18
+                        "Value": 10.4,
+                        "Unit": "C",
+                        "UnitType": 17
                     },
                     "Maximum": {
-                        "Value": 62,
-                        "Unit": "F",
-                        "UnitType": 18
+                        "Value": 16.9,
+                        "Unit": "C",
+                        "UnitType": 17
                     }
                 },
                 "Day": {
@@ -68,29 +34,29 @@ let initialState = {
                     "HasPrecipitation": false
                 },
                 "Night": {
-                    "Icon": 8,
-                    "IconPhrase": "Dreary",
+                    "Icon": 38,
+                    "IconPhrase": "Mostly cloudy",
                     "HasPrecipitation": false
                 },
                 "Sources": [
                     "AccuWeather"
                 ],
-                "MobileLink": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?day=1&lang=en-us",
-                "Link": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?day=1&lang=en-us"
+                "MobileLink": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?day=1&unit=c&lang=en-us",
+                "Link": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?day=1&unit=c&lang=en-us"
             },
             {
                 "Date": "2022-03-20T07:00:00+02:00",
                 "EpochDate": 1647752400,
                 "Temperature": {
                     "Minimum": {
-                        "Value": 51,
-                        "Unit": "F",
-                        "UnitType": 18
+                        "Value": 8.8,
+                        "Unit": "C",
+                        "UnitType": 17
                     },
                     "Maximum": {
-                        "Value": 58,
-                        "Unit": "F",
-                        "UnitType": 18
+                        "Value": 13.4,
+                        "Unit": "C",
+                        "UnitType": 17
                     }
                 },
                 "Day": {
@@ -106,53 +72,53 @@ let initialState = {
                 "Sources": [
                     "AccuWeather"
                 ],
-                "MobileLink": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?day=2&lang=en-us",
-                "Link": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?day=2&lang=en-us"
+                "MobileLink": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?day=2&unit=c&lang=en-us",
+                "Link": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?day=2&unit=c&lang=en-us"
             },
             {
                 "Date": "2022-03-21T07:00:00+02:00",
                 "EpochDate": 1647838800,
                 "Temperature": {
                     "Minimum": {
-                        "Value": 54,
-                        "Unit": "F",
-                        "UnitType": 18
+                        "Value": 9.2,
+                        "Unit": "C",
+                        "UnitType": 17
                     },
                     "Maximum": {
-                        "Value": 60,
-                        "Unit": "F",
-                        "UnitType": 18
+                        "Value": 14.2,
+                        "Unit": "C",
+                        "UnitType": 17
                     }
                 },
                 "Day": {
-                    "Icon": 4,
-                    "IconPhrase": "Intermittent clouds",
+                    "Icon": 2,
+                    "IconPhrase": "Mostly sunny",
                     "HasPrecipitation": false
                 },
                 "Night": {
-                    "Icon": 38,
-                    "IconPhrase": "Mostly cloudy",
+                    "Icon": 7,
+                    "IconPhrase": "Cloudy",
                     "HasPrecipitation": false
                 },
                 "Sources": [
                     "AccuWeather"
                 ],
-                "MobileLink": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?day=3&lang=en-us",
-                "Link": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?day=3&lang=en-us"
+                "MobileLink": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?day=3&unit=c&lang=en-us",
+                "Link": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?day=3&unit=c&lang=en-us"
             },
             {
                 "Date": "2022-03-22T07:00:00+02:00",
                 "EpochDate": 1647925200,
                 "Temperature": {
                     "Minimum": {
-                        "Value": 48,
-                        "Unit": "F",
-                        "UnitType": 18
+                        "Value": 9.2,
+                        "Unit": "C",
+                        "UnitType": 17
                     },
                     "Maximum": {
-                        "Value": 59,
-                        "Unit": "F",
-                        "UnitType": 18
+                        "Value": 14.9,
+                        "Unit": "C",
+                        "UnitType": 17
                     }
                 },
                 "Day": {
@@ -170,8 +136,43 @@ let initialState = {
                 "Sources": [
                     "AccuWeather"
                 ],
-                "MobileLink": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?day=4&lang=en-us",
-                "Link": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?day=4&lang=en-us"
+                "MobileLink": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?day=4&unit=c&lang=en-us",
+                "Link": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?day=4&unit=c&lang=en-us"
+            },
+            {
+                "Date": "2022-03-23T07:00:00+02:00",
+                "EpochDate": 1648011600,
+                "Temperature": {
+                    "Minimum": {
+                        "Value": 8.4,
+                        "Unit": "C",
+                        "UnitType": 17
+                    },
+                    "Maximum": {
+                        "Value": 13.8,
+                        "Unit": "C",
+                        "UnitType": 17
+                    }
+                },
+                "Day": {
+                    "Icon": 13,
+                    "IconPhrase": "Mostly cloudy w/ showers",
+                    "HasPrecipitation": true,
+                    "PrecipitationType": "Rain",
+                    "PrecipitationIntensity": "Moderate"
+                },
+                "Night": {
+                    "Icon": 18,
+                    "IconPhrase": "Rain",
+                    "HasPrecipitation": true,
+                    "PrecipitationType": "Rain",
+                    "PrecipitationIntensity": "Light"
+                },
+                "Sources": [
+                    "AccuWeather"
+                ],
+                "MobileLink": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?day=5&unit=c&lang=en-us",
+                "Link": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?day=5&unit=c&lang=en-us"
             }
         ]
     }],

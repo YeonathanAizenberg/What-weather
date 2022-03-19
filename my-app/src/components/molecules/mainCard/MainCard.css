@@ -1,0 +1,80 @@
+.data-container-box {
+    border: 2px solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 70%;
+    height: 80vh;
+}
+
+.data-box-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.add-to-favorites-wrapper {
+    margin: 0 3% 0 3%;
+    display: flex;
+    width: 20%;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.add-to-favorites-wrapper div{
+    margin: 0 3% 0 3%;
+}
+
+.add-to-favorites-wrapper button{
+    box-shadow: 5px 10px #888888;
+}
+
+.data-box-header-city-data {
+    margin: 0 0 0 3%;
+    display: flex;
+    align-items: center;
+}
+
+.data-box-header-city-data div{
+    flex-direction: column;
+}
+
+.data-box-header-city-data img {
+    width: 50%;
+    height: 10vh;
+    border-radius: 10px;
+    margin: 0px 5% 0 0px;
+}
+
+.data-box-forecast {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.data-box-clouds {
+    margin: 5% 0;
+}
+
+.data-box-clouds h1{
+    font-size: 500%;
+    font-family: cursive;
+}
+
+@media only screen and (max-width: 330px) {
+    .data-box-clouds h1{
+        font-size: 400%;
+    }
+}
+
+@media only screen and (max-width: 610px) {
+    .data-box-header {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .add-to-favorites-wrapper{
+        margin: 3% 3% 0 10%;
+    }
+}

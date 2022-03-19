@@ -13,5 +13,5 @@ export function locationCompleteSearch(searchedCity) {
 }
 
 export function fiveDaysForeCast() {
-    return axios.get(`${BaseURL}/forecasts/v1/daily/5day/${locationCode}?apikey=${APIKey}`);
+    return axios.get(`${BaseURL}/forecasts/v1/daily/5day/${locationCode}?apikey=${APIKey}&metric=true`);
 }

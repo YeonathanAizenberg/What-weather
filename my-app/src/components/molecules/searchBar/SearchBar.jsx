@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { locationCompleteSearch } from '../../../lib/api';
 import { fetchSearchDataRequest, fetchSearchDataSuccess, fetchSearchDataError } from "../../../actions/searchData/action";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faSearch} from '@fortawesome/free-solid-svg-icons';
+import { Button } from 'react-bootstrap';
 import './SearchBar.css';
 
 function SearchBar() {
@@ -15,6 +18,7 @@ function SearchBar() {
         // .then(response => {
         //     dispatch(fetchSearchDataSuccess(response.data));
         //     localStorage.setItem("currentCityKey", response.data.key)
+        //     localStorage.setItem("currentCityName", response.data.LocalizedName)
         // }).catch(error => {
         //     dispatch(fetchSearchDataError(error));
         // })
@@ -22,16 +26,20 @@ function SearchBar() {
 
     return (
         <>
-            <h6>Search</h6>
-            <button
-                onClick={searchCityWeatherInfo}
-            >
-                Icon For Search
-            </button>
-            <input 
-                type="text" 
-                onChange={e => setCity(e.target.value)}
-            />
+            <div className='search-wrapper'>
+                <Button 
+                    variant="outline-primary"
+                    onClick={searchCityWeatherInfo}
+                >
+                    <FontAwesomeIcon icon={faSearch} />
+                </Button>
+                <input 
+                    className='search-input'
+                    type="text" 
+                    onChange={e => setCity(e.target.value)}
+                />
+            </div>
+            
         </>
     );
 }
