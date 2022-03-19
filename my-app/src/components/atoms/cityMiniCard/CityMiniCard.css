@@ -1,0 +1,15 @@
+.city-card {
+    border: 2px solid;
+    width: 15%;
+    height: 40vh;
+    margin: 0px 1%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+
+@media only screen and (max-width: 400px) {
+    .city-card {
+        font-size: smaller;
+    }
+}
