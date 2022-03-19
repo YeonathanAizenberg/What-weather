@@ -1,6 +1,7 @@
 let initialState = {
-    loading: false,
+    loading: true,
     data: [{
+        "isTheMockForeCastDataState": true,
         "Headline": {
             "EffectiveDate": "2022-03-23T01:00:00+02:00",
             "EffectiveEpochDate": 1647990000,

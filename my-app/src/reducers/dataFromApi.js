@@ -1,5 +1,5 @@
 let initialState = {
-    loading: false,
+    loading: true,
     data: [{
         "isTheMockDataState": true,
         "LocalObservationDateTime": "2022-03-18T22:37:00+02:00",

@@ -4,13 +4,20 @@ import { averageTempFormatter, metricImperialTempFormatter } from '../../../util
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faHeart} from '@fortawesome/free-solid-svg-icons';
 import {faHeart as faHeartEmpty} from '@fortawesome/free-regular-svg-icons';
-import { Button } from 'react-bootstrap';
+import { Button, Spinner } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 import './MainCard.css';
 
 function MainCard({data, foreCastData}) {
     const [favoriteCities, setFavoriteCities] = useState(JSON.parse(localStorage.getItem("favCity"))|| [])
     const [isFavorite, setIsFavorite] = useState(false)
+    const [dataLoaded, setDataLoaded] = useState(false)
+    const loading = useSelector(state => state?.getData.loading)
     var locationCityName = localStorage.getItem("currentCityName") ? localStorage.getItem("currentCityName") : "Tel Aviv"
+    
+    console.log("loading",loading)
+    console.log("data",data)
+    console.log("foreCastData",foreCastData)
 
     const updateFavoriteCities = (newCity) => {
         const name = newCity.LocalizedName || "Tel Aviv"
@@ -33,8 +40,17 @@ function MainCard({data, foreCastData}) {
         [],
     );
 
+    useEffect(
+        () => {
+            loading == true ? 
+            setDataLoaded(false) : setDataLoaded(true)
+        },
+        [loading],
+    );
+
     return (
         <>
+        {dataLoaded ? 
             <div className="data-container-box">
                 <div className="data-box-header">
                     <div className="data-box-header-city-data">
@@ -43,31 +59,31 @@ function MainCard({data, foreCastData}) {
                             <div>
                                 {locationCityName}
                             </div> 
-                            <div>
-                                {metricImperialTempFormatter( 
-                                    data?.Temperature.Metric.Value, 
-                                    data?.Temperature.Metric.Unit 
-                                )}
-                            </div>
+                                <div>
+                                    {metricImperialTempFormatter( 
+                                        data?.data[0]?.Temperature?.Metric?.Value, 
+                                        data?.data[0]?.Temperature?.Metric?.Unit 
+                                    )}
+                                </div>
                         </div>
                     </div>
                     <div className='add-to-favorites-wrapper'>
                         <div>
                             <FontAwesomeIcon icon={isFavorite ? faHeart : faHeartEmpty} fontSize={"4vh"}/>
                         </div>
-                        <Button disabled={isFavorite} onClick={() => updateFavoriteCities(data)}>
+                        <Button disabled={isFavorite} onClick={() => updateFavoriteCities(data.data)}>
                             Add To Favorites
                         </Button>
                     </div>
                 </div>
                 <div className="data-box-clouds">
                     <h1>
-                        {data?.WeatherText}
+                        {data?.data[0]?.WeatherText}
                     </h1>
                 </div>
                 <div className="data-box-forecast-wrapper">
                     <div className="data-box-forecast">
-                        {foreCastData?.DailyForecasts.map((day, index) => 
+                        {foreCastData.data?.DailyForecasts?.map((day, index) => 
                             <ForeCastMiniCard 
                                 key={index} 
                                 day={day.Date} 
@@ -83,6 +99,9 @@ function MainCard({data, foreCastData}) {
                     </div>
                 </div>
             </div>
+                :
+                <Spinner animation="grow" variant="primary" />
+            }
         </>
     );
 }
