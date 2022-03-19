@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ForeCastMiniCard from '../../atoms/foreCastMiniCard/ForeCastMiniCard';
 import { averageTempFormatter, metricImperialTempFormatter } from '../../../utils/Utils';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -8,28 +8,31 @@ import { Button } from 'react-bootstrap';
 import './MainCard.css';
 
 function MainCard({data, foreCastData}) {
-    const [favoriteCities, setFavoriteCities] = useState([localStorage.getItem("favCity")])
+    const [favoriteCities, setFavoriteCities] = useState(JSON.parse(localStorage.getItem("favCity"))|| [])
     const [isFavorite, setIsFavorite] = useState(false)
     var locationCityName = localStorage.getItem("currentCityName") ? localStorage.getItem("currentCityName") : "Tel Aviv"
-    console.log("data",data)
-    console.log("foreCastData",foreCastData.DailyForecasts)
 
     const updateFavoriteCities = (newCity) => {
-        const newCityInfo = (newCity.EpochTime, newCity.WeatherText, newCity.Temperature.Metric.Value)
+        const name = newCity.LocalizedName || "Tel Aviv"
+        const temp = newCity.Temperature.Metric.Value
+        const weather = newCity.WeatherText
+        const newCityInfo = {name, temp, weather}
         setIsFavorite(true)
-        localStorage.setItem("favCity", ...favoriteCities, newCityInfo)
+        localStorage.setItem("favCity", JSON.stringify(newCityInfo))
         setFavoriteCities(...favoriteCities, newCityInfo)
-        checkIfFavorite()
     }
 
-    const checkIfFavorite = () => {
-        if(favoriteCities?.includes(locationCityName)) {
-            return faHeart
-        } else {
-            return faHeartEmpty
-        }
-    }
-console.log(data)
+    useEffect(
+        () => {
+            for (let i = 0; i < Array(favoriteCities)?.length; i++) {
+                if(Array(favoriteCities)[i]?.name?.includes(locationCityName)) {
+                    setIsFavorite(true)
+                } 
+            }
+        },
+        [],
+    );
+
     return (
         <>
             <div className="data-container-box">
@@ -50,7 +53,7 @@ console.log(data)
                     </div>
                     <div className='add-to-favorites-wrapper'>
                         <div>
-                            <FontAwesomeIcon icon={checkIfFavorite()} fontSize={"4vh"}/>
+                            <FontAwesomeIcon icon={isFavorite ? faHeart : faHeartEmpty} fontSize={"4vh"}/>
                         </div>
                         <Button disabled={isFavorite} onClick={() => updateFavoriteCities(data)}>
                             Add To Favorites

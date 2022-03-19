@@ -7,14 +7,14 @@ function CityMiniCard({city, temp, weather}) {
         <div className='city-card'>
             <div>
                 <div>
-                    {"city"}
+                    {city}
                 </div>
                 <div>
-                    {"temp"}
+                    {temp}
                 </div>
             </div>
             <div>
-                {"weather"}
+                {weather}
             </div>
         </div>
     );
