@@ -7,12 +7,15 @@ import {faHeart as faHeartEmpty} from '@fortawesome/free-regular-svg-icons';
 import { Button, Spinner } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import './MainCard.css';
+import ErrorMessage from '../../atoms/errorMessage/ErrorMessage';
 
 function MainCard({data, foreCastData}) {
     const [favoriteCities, setFavoriteCities] = useState(JSON.parse(localStorage.getItem("favCity"))|| [])
     const [isFavorite, setIsFavorite] = useState(false)
     const [dataLoaded, setDataLoaded] = useState(false)
     const loading = useSelector(state => state?.getData.loading)
+    const dataError = useSelector(state => state?.getData.error)
+    const foreCastDataError = useSelector(state => state?.getForeCastData.error)
     var locationCityName = localStorage.getItem("currentCityName") ? localStorage.getItem("currentCityName") : "Tel Aviv"
     
     console.log("loading",loading)
@@ -55,17 +58,24 @@ function MainCard({data, foreCastData}) {
                 <div className="data-box-header">
                     <div className="data-box-header-city-data">
                         <img src="tlv.webp" alt="cityPic"/>
-                        <div>
+                        {dataError === null && !loading?
                             <div>
-                                {locationCityName}
-                            </div> 
+                                <div>
+                                    {locationCityName}
+                                </div> 
                                 <div>
                                     {metricImperialTempFormatter( 
                                         data?.data[0]?.Temperature?.Metric?.Value, 
                                         data?.data[0]?.Temperature?.Metric?.Unit 
                                     )}
                                 </div>
-                        </div>
+                            </div>
+                            :
+                            <ErrorMessage 
+                                status={dataError?.message} 
+                                procedure={" Your data wasn't found, try to search again"}
+                            />
+                        }
                     </div>
                     <div className='add-to-favorites-wrapper'>
                         <div>
@@ -82,6 +92,7 @@ function MainCard({data, foreCastData}) {
                     </h1>
                 </div>
                 <div className="data-box-forecast-wrapper">
+                {foreCastDataError === null && !loading?
                     <div className="data-box-forecast">
                         {foreCastData.data?.DailyForecasts?.map((day, index) => 
                             <ForeCastMiniCard 
@@ -97,10 +108,16 @@ function MainCard({data, foreCastData}) {
                             />
                         )}
                     </div>
+                    :
+                    <ErrorMessage 
+                        status={foreCastDataError?.message} 
+                        procedure={"Your data wasn't found, try to search again"}
+                    />
+                }
                 </div>
             </div>
-                :
-                <Spinner animation="grow" variant="primary" />
+            :
+            <Spinner animation="grow" variant="primary" />
             }
         </>
     );
