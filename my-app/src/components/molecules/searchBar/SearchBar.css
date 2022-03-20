@@ -3,3 +3,9 @@
     justify-content: center;
     margin: 1% 0;
 }
+
+.search-input {
+    border: 2px solid;
+    color: #0d6efd;
+    border-radius: 5px;
+}

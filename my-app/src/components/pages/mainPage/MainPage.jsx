@@ -11,7 +11,6 @@ const MainPage = () => {
     const dispatch = useDispatch();
 
     const data = useSelector(state => state?.getData)
-    // const loading = useSelector(state => state?.getData.loading)
     const foreCastData = useSelector(state => state?.getForeCastData)
 
     useEffect(() => {
@@ -38,7 +37,6 @@ const MainPage = () => {
         <div className="main-page-wrapper">
             <SearchBar/>
             <MainCard 
-                // loading={loading}
                 data={data} 
                 foreCastData={foreCastData}
             />
