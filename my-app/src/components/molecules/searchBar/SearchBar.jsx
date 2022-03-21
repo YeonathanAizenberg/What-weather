@@ -17,27 +17,27 @@ function SearchBar() {
     const searchDataError = useSelector(state => state?.getSearchData.error)
 
     const searchCityWeatherInfo = () => {
-        // dispatch(fetchSearchDataRequest());
-        // locationCompleteSearch(city)
-        // .then(response => {
-        //     dispatch(fetchSearchDataSuccess(response.data));
-        //     if(response?.data.length > 1) {
-        //         let moreThanOneCities = []
-        //         for(let i = 0; i < response?.data.length; i++) {
-        //             const cityCountry = response.data[i].Country.LocalizedName
-        //             const cityCountryKey = response.data[i].Key
-        //             moreThanOneCities.push({cityCountry,cityCountryKey})  
-        //         }
-        //         setMultipleCities(moreThanOneCities)
-        //         setDisplayMultipleCitiesModal(true)
-        //     } else {
-        //         localStorage.setItem("currentCityName", response?.data.Country.LocalizedName)
-        //         localStorage.setItem("currentCityKey", response?.data.Key)
-        //         window.location.reload();
-        //     }
-        // }).catch(error => {
-        //     dispatch(fetchSearchDataError(error));
-        // })
+        dispatch(fetchSearchDataRequest());
+        locationCompleteSearch(city)
+        .then(response => {
+            dispatch(fetchSearchDataSuccess(response.data));
+            if(response?.data.length > 1) {
+                let moreThanOneCities = []
+                for(let i = 0; i < response?.data.length; i++) {
+                    const cityCountry = response.data[i].Country.LocalizedName
+                    const cityCountryKey = response.data[i].Key
+                    moreThanOneCities.push({cityCountry,cityCountryKey})  
+                }
+                setMultipleCities(moreThanOneCities)
+                setDisplayMultipleCitiesModal(true)
+            } else {
+                localStorage.setItem("currentCityName", response?.data.Country.LocalizedName)
+                localStorage.setItem("currentCityKey", response?.data.Key)
+                window.location.reload();
+            }
+        }).catch(error => {
+            dispatch(fetchSearchDataError(error));
+        })
     }
 
     return (

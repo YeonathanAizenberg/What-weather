@@ -1,21 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
+import { favCitiesParse, removeFromLocalStore } from "../../../utils/Utils";
 import CityMiniCard from "../../atoms/cityMiniCard/CityMiniCard";
 import './Favorites.css'
 
 const Favorites = () => {
 
-    const favoriteCitiesOne = JSON.parse(localStorage.getItem("favCityOne"))
-    const favoriteCitiesTwo = JSON.parse(localStorage.getItem("favCityTwo"))
-    const favoriteCitiesThree = JSON.parse(localStorage.getItem("favCityThree"))
-    const favoriteCitiesFour = JSON.parse(localStorage.getItem("favCityFour"))
-    const favoriteCitiesFive = JSON.parse(localStorage.getItem("favCityFive"))
-
-    const favoriteCities = Array(favoriteCitiesOne,favoriteCitiesTwo,favoriteCitiesThree, favoriteCitiesFour, favoriteCitiesFive)
-    const filteredFavoriteCities = favoriteCities.filter(city => city != null)
-
     const removeCard =(cityKey)=> {
-        for (let i = 0; i < filteredFavoriteCities.length; i++) {
-            if(filteredFavoriteCities[i].cityKey === cityKey) {
+        for (let i = 0; i < favCitiesParse().length; i++) {
+            if(favCitiesParse()[i].cityKey === cityKey) {
                 removeFromLocalStore(cityKey)
                 window.location.reload();
             }
@@ -27,28 +19,10 @@ const Favorites = () => {
         window.location.replace("/")
     }
 
-    const removeFromLocalStore = (cardCityKey) => {
-        if(favoriteCitiesOne?.cityKey == cardCityKey) {
-            localStorage.removeItem("favCityOne");
-        } 
-        if(favoriteCitiesTwo?.cityKey == cardCityKey) {
-            localStorage.removeItem("favCityTwo");
-        } 
-        if(favoriteCitiesThree?.cityKey == cardCityKey) {
-            localStorage.removeItem("favCityThree");
-        } 
-        if(favoriteCitiesFour?.cityKey == cardCityKey) {
-            localStorage.removeItem("favCityFour");
-        } 
-        if(favoriteCitiesFive?.cityKey == cardCityKey) {
-            localStorage.removeItem("favCityFive");
-        }
-    }
-
     return (
         <div className="fav-city-cards-wrapper">
-            {filteredFavoriteCities.length !== 0 ? 
-                filteredFavoriteCities?.map((city, index) =>
+            {favCitiesParse().length !== 0 ? 
+                favCitiesParse()?.map((city, index) =>
                     <CityMiniCard 
                         selectCard={selectCard}
                         removeCard={removeCard}
@@ -66,4 +40,5 @@ const Favorites = () => {
         </div>
     );
 };
+
 export default Favorites;

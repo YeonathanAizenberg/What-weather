@@ -13,25 +13,25 @@ const MainPage = () => {
     const data = useSelector(state => state?.getData)
     const foreCastData = useSelector(state => state?.getForeCastData)
 
-    // useEffect(() => {
-    //     dispatch(fetchDataRequest());
-    //     getCurrentWeather()
-    //     .then(response => {
-    //         dispatch(fetchDataSuccess(response.data));
-    //     }).catch(error => {
-    //         dispatch(fetchDataError(error));
-    //     })
-    // },[])
+    useEffect(() => {
+        dispatch(fetchDataRequest());
+        getCurrentWeather()
+        .then(response => {
+            dispatch(fetchDataSuccess(response.data));
+        }).catch(error => {
+            dispatch(fetchDataError(error));
+        })
+    },[])
 
-    // useEffect(() => {
-    //     dispatch(fetchForecastDataRequest());
-    //     fiveDaysForeCast()
-    //     .then(response => {
-    //         dispatch(fetchForecastDataSuccess(response.data));
-    //     }).catch(error => {
-    //         dispatch(fetchForecastDataError(error));
-    //     })
-    // },[])
+    useEffect(() => {
+        dispatch(fetchForecastDataRequest());
+        fiveDaysForeCast()
+        .then(response => {
+            dispatch(fetchForecastDataSuccess(response.data));
+        }).catch(error => {
+            dispatch(fetchForecastDataError(error));
+        })
+    },[])
 
     return (
         <div className="main-page-wrapper">
