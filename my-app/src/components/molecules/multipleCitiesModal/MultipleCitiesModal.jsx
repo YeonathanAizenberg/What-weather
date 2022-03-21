@@ -4,7 +4,13 @@ import MiniEnvelops from '../../atoms/miniEnvelops/MiniEnvelops';
 import './MultipleCitiesModal.css';
 
 function MultipleCitiesModal({show, onHide, data, cityToSearch}) {
-console.log(data)
+
+    const handlingData = (name, key) => {
+        localStorage.setItem("currentCityName", name)
+        localStorage.setItem("currentCityKey", key)
+        window.location.reload();
+    }
+
     return (
         <Modal
             show={show} 
@@ -25,7 +31,8 @@ console.log(data)
                         <MiniEnvelops 
                             key={index}
                             data={country.cityCountry}
-                            cityKey={country.cityCountryKey}
+                            envelopsKey={country.cityCountryKey}
+                            handlingData={handlingData}
                         />
                     )}
                 </div>
