@@ -16,29 +16,49 @@ function SearchBar() {
     const [displayMultipleCitiesModal, setDisplayMultipleCitiesModal] = useState(false);
     const searchDataError = useSelector(state => state?.getSearchData.error)
 
+    const searchData = useSelector(state => state?.getSearchData.data[0])
+
+    // const searchCityWeatherInfo = () => {
+        // dispatch(fetchSearchDataRequest());
+        // locationCompleteSearch(city)
+        // .then(response => {
+        //     dispatch(fetchSearchDataSuccess(response.data));
+        //     if(response?.data.length > 1) {
+        //         let moreThanOneCities = []
+        //         for(let i = 0; i < response?.data.length; i++) {
+        //             const cityCountry = response.data[i].Country.LocalizedName
+        //             const cityCountryKey = response.data[i].Key
+        //             moreThanOneCities.push({cityCountry,cityCountryKey})  
+        //         }
+        //         setMultipleCities(moreThanOneCities)
+        //         setDisplayMultipleCitiesModal(true)
+        //     } else {
+        //         localStorage.setItem("currentCityName", response?.data.Country.LocalizedName)
+        //         localStorage.setItem("currentCityKey", response?.data.Key)
+        //         window.location.reload();
+        //     }
+        // }).catch(error => {
+        //     dispatch(fetchSearchDataError(error));
+        // })
+    // }
+
     const searchCityWeatherInfo = () => {
-        dispatch(fetchSearchDataRequest());
-        locationCompleteSearch(city)
-        .then(response => {
-            dispatch(fetchSearchDataSuccess(response.data));
-            if(response?.data.length > 1) {
-                let moreThanOneCities = []
-                for(let i = 0; i < response?.data.length; i++) {
-                    const cityCountry = response.data[i].Country.LocalizedName
-                    const cityCountryKey = response.data[i].Key
-                    moreThanOneCities.push({cityCountry,cityCountryKey})  
+        if(searchData.length > 1) {
+                    let moreThanOneCities = []
+                    for(let i = 0; i < searchData.length; i++) {
+                        const cityCountry = searchData[i].Country.LocalizedName
+                        const cityCountryKey = searchData[i].Key
+                        moreThanOneCities.push({cityCountry,cityCountryKey})  
+                    }
+                    setMultipleCities(moreThanOneCities)
+                    setDisplayMultipleCitiesModal(true)
+                } else {
+                    localStorage.setItem("currentCityName", searchData.Country.LocalizedName)
+                    localStorage.setItem("currentCityKey", searchData.Key)
+                    window.location.reload();
                 }
-                setMultipleCities(moreThanOneCities)
-                setDisplayMultipleCitiesModal(true)
-            } else {
-                localStorage.setItem("currentCityName", response?.data.Country.LocalizedName)
-                localStorage.setItem("currentCityKey", response?.data.Key)
-                window.location.reload();
-            }
-        }).catch(error => {
-            dispatch(fetchSearchDataError(error));
-        })
     }
+
 
     return (
         <>
