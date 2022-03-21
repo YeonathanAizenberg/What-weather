@@ -13,6 +13,7 @@ function MainCard({data, foreCastData}) {
 
     const [isFavorite, setIsFavorite] = useState(false)
     const [dataLoaded, setDataLoaded] = useState(false)
+    const [weatherIcon, setWeatherIcon] = useState("https://apidev.accuweather.com/developers/Media/Default/WeatherIcons/36-s.png")
     const loading = useSelector(state => state?.getData.loading)
     const dataError = useSelector(state => state?.getData.error)
     const foreCastDataError = useSelector(state => state?.getForeCastData.error)
@@ -40,6 +41,8 @@ function MainCard({data, foreCastData}) {
         () => 
             {
                 setIsFavorite(checkIfCityIsFavorite(locationCityKey))
+                const currentWeatherIcon = data?.data[0].WeatherIcon
+                setWeatherIcon(`https://apidev.accuweather.com/developers/Media/Default/WeatherIcons/${currentWeatherIcon}-s.png`)
             },
         [],
     );
@@ -58,7 +61,7 @@ function MainCard({data, foreCastData}) {
             <div className="data-container-box">
                 <div className="data-box-header">
                     <div className="data-box-header-city-data">
-                        <img src="tlv.webp" alt="cityPic"/>
+                        <img src={weatherIcon} alt="weatherIcon"/>
                         {dataError === null && loading?
                             <div>
                                 <div>
