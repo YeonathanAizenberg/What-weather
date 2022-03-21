@@ -1,10 +1,14 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
 import './CityMiniCard.css';
 
-function CityMiniCard({city, temp, weather}) {
+function CityMiniCard({selectCard, removeCard, cityKey, city, temp, weather}) {
 
     return (
         <div className='city-card'>
+            <Button onClick={()=> removeCard(cityKey)}>
+                Remove From Favorites
+            </Button>
             <div>
                 <div>
                     {city}
@@ -16,6 +20,9 @@ function CityMiniCard({city, temp, weather}) {
             <div>
                 {weather}
             </div>
+            <Button onClick={()=> selectCard(cityKey)}>
+                Go to City Page
+            </Button>
         </div>
     );
 }

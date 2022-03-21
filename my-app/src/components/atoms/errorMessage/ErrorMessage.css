@@ -9,3 +9,7 @@
     margin: 1%;
     padding: 1%;
 }
+
+.error-message div{
+    margin: 0 1%;
+}
