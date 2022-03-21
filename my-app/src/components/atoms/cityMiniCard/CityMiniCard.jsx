@@ -20,7 +20,7 @@ function CityMiniCard({selectCard, removeCard, cityKey, city, temp, weather}) {
             <div>
                 {weather}
             </div>
-            <Button onClick={()=> selectCard(cityKey)}>
+            <Button onClick={()=> selectCard(cityKey,city)}>
                 Go to City Page
             </Button>
         </div>

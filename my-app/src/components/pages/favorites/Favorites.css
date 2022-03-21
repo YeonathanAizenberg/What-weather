@@ -1,6 +1,6 @@
 .fav-city-cards-wrapper {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 60vh;
+    flex-wrap: wrap;
+    margin-top: 5%;
 }

@@ -1,12 +1,7 @@
 .city-card {
     border: 2px solid;
     border-radius: 3%;
-    width: 25%;
-    height: 40vh;
-    margin: 0px 1%;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
+    margin: 1%;
     font-size: larger;
     font-family: cursive;
 }
