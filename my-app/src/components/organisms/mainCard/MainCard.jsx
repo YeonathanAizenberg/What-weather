@@ -98,7 +98,7 @@ function MainCard({data, foreCastData}) {
                 <div className="data-box-forecast-wrapper">
                 {foreCastDataError === null && loading?
                     <div className="data-box-forecast">
-                        {foreCastData.data?.DailyForecasts?.map((day, index) => 
+                        {foreCastData.data[0]?.DailyForecasts?.map((day, index) => 
                             <ForeCastMiniCard 
                                 key={index} 
                                 day={day.Date} 

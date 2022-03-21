@@ -14,8 +14,9 @@ const Favorites = () => {
         }
     }
 
-    const selectCard =(cityKey)=> {
+    const selectCard =(cityKey, cityName)=> {
         localStorage.setItem("currentCityKey", cityKey)
+        localStorage.setItem("currentCityName", cityName)
         window.location.replace("/")
     }
 
