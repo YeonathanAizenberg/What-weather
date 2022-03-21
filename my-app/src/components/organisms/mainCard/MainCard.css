@@ -36,6 +36,7 @@
 
 .data-box-header-city-data div{
     flex-direction: column;
+    font-family: cursive;
 }
 
 .data-box-header-city-data img {
