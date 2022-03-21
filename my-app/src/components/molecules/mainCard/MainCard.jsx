@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ForeCastMiniCard from '../../atoms/foreCastMiniCard/ForeCastMiniCard';
-import { averageTempFormatter, metricImperialTempFormatter } from '../../../utils/Utils';
+import { averageTempFormatter, checkIfCityIsFavorite, favCityEmptySpot, metricImperialTempFormatter } from '../../../utils/Utils';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faHeart} from '@fortawesome/free-solid-svg-icons';
 import {faHeart as faHeartEmpty} from '@fortawesome/free-regular-svg-icons';
@@ -10,11 +10,6 @@ import ErrorMessage from '../../atoms/errorMessage/ErrorMessage';
 import './MainCard.css';
 
 function MainCard({data, foreCastData}) {
-    const favoriteCitiesOne = JSON.parse(localStorage.getItem("favCityOne"))
-    const favoriteCitiesTwo = JSON.parse(localStorage.getItem("favCityTwo"))
-    const favoriteCitiesThree = JSON.parse(localStorage.getItem("favCityThree"))
-    const favoriteCitiesFour = JSON.parse(localStorage.getItem("favCityFour"))
-    const favoriteCitiesFive = JSON.parse(localStorage.getItem("favCityFive"))
 
     const [isFavorite, setIsFavorite] = useState(false)
     const [dataLoaded, setDataLoaded] = useState(false)
@@ -33,26 +28,6 @@ function MainCard({data, foreCastData}) {
         return newCityInfo
     }
 
-    const favCityEmptySpot = () => {
-        if(!favoriteCitiesOne) {
-            return "favCityOne"
-        } 
-        if(!favoriteCitiesTwo) {
-            return "favCityTwo"
-        } 
-        if(!favoriteCitiesThree) {
-            return "favCityThree"
-        } 
-        if(!favoriteCitiesFour) {
-            return "favCityFour"
-        } 
-        if(!favoriteCitiesFive) {
-            return "favCityFive"
-        } else {
-            alert("You have the maximum number of favored cities")
-        }
-    }
-
     const updateFavoriteCities = (newCity) => {
         const newCityInfo = newCityObj(newCity)
         if(favCityEmptySpot() !== undefined) {
@@ -62,23 +37,10 @@ function MainCard({data, foreCastData}) {
     }
 
     useEffect(
-        () => {
-            if(favoriteCitiesOne?.cityKey == locationCityKey) {
-                setIsFavorite(true)
-            } 
-            if(favoriteCitiesTwo?.cityKey == locationCityKey) {
-                setIsFavorite(true)
-            } 
-            if(favoriteCitiesThree?.cityKey == locationCityKey) {
-                setIsFavorite(true)
-            } 
-            if(favoriteCitiesFour?.cityKey == locationCityKey) {
-                setIsFavorite(true)
-            } 
-            if(favoriteCitiesFive?.cityKey == locationCityKey) {
-                setIsFavorite(true)
-            }
-        },
+        () => 
+            {
+                setIsFavorite(checkIfCityIsFavorite(locationCityKey))
+            },
         [],
     );
 
@@ -92,7 +54,7 @@ function MainCard({data, foreCastData}) {
 
     return (
         <>
-        {!dataLoaded ? 
+        {dataLoaded ? 
             <div className="data-container-box">
                 <div className="data-box-header">
                     <div className="data-box-header-city-data">
