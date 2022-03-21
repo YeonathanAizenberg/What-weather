@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchDataError, fetchDataRequest, fetchDataSuccess } from "../../../actions/fetchData/action";
 import { fetchForecastDataRequest, fetchForecastDataSuccess, fetchForecastDataError } from "../../../actions/fetchForecastData/action";
 import { getCurrentWeather, fiveDaysForeCast } from "../../../lib/api";
-import MainCard from "../../molecules/mainCard/MainCard";
+import MainCard from "../../organisms/mainCard/MainCard";
 import SearchBar from "../../molecules/searchBar/SearchBar";
 import './MainPage.css';
 
