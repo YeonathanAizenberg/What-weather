@@ -41,8 +41,6 @@ function MainCard({data, foreCastData}) {
         () => 
             {
                 setIsFavorite(checkIfCityIsFavorite(locationCityKey))
-                const currentWeatherIcon = data?.data[0].WeatherIcon
-                setWeatherIcon(`https://apidev.accuweather.com/developers/Media/Default/WeatherIcons/${currentWeatherIcon}-s.png`)
             },
         [],
     );
@@ -55,29 +53,52 @@ function MainCard({data, foreCastData}) {
         [loading],
     );
 
+    const settingIcon = () => {
+        const currentWeatherIcon = data?.data[0].WeatherIcon
+        if(currentWeatherIcon <= 9){
+            return `https://apidev.accuweather.com/developers/Media/Default/WeatherIcons/0${currentWeatherIcon}-s.png`
+        } else {
+            return `https://apidev.accuweather.com/developers/Media/Default/WeatherIcons/${currentWeatherIcon}-s.png`
+        }
+    }
+
+    setTimeout(function() {
+        setDataLoaded(true);
+    }, 5000);
+
     return (
         <>
         {dataLoaded ? 
             <div className="data-container-box">
                 <div className="data-box-header">
                     <div className="data-box-header-city-data">
-                        <img src={weatherIcon} alt="weatherIcon"/>
-                        {dataError === null && loading?
+                        {dataError === null?
                             <div>
+                                <img src={settingIcon()} alt="weatherIcon"/>
                                 <div>
                                     {locationCityName}
-                                </div> 
-                                <div>
-                                    {metricImperialTempFormatter( 
-                                        data?.data[0]?.Temperature?.Metric?.Value, 
-                                        data?.data[0]?.Temperature?.Metric?.Unit 
-                                    )}
+                                </div>
+                                <div className='temp-wrapper'>
+                                    {data?.data.length !==0 ? 
+                                        <div>
+                                            {metricImperialTempFormatter( 
+                                                data?.data[0]?.Temperature?.Metric?.Value, 
+                                                data?.data[0]?.Temperature?.Metric?.Unit 
+                                            )}
+                                        </div>
+                                        :
+                                        <div>
+                                            <ErrorMessage 
+                                                procedure={" Your data wasn't found :/"}
+                                            />
+                                        </div>
+                                    }
                                 </div>
                             </div>
                             :
                             <ErrorMessage 
-                                status={dataError?.message} 
-                                procedure={" Your data wasn't found, try to search again"}
+                                status={dataError?.message || "No data from the server"} 
+                                procedure={" Your data wasn't found :/"}
                             />
                         }
                     </div>
@@ -91,33 +112,42 @@ function MainCard({data, foreCastData}) {
                     </div>
                 </div>
                 <div className="data-box-clouds">
-                    <h1>
-                        {data?.data[0]?.WeatherText}
-                    </h1>
+                    {dataError === null?
+                        <h1>
+                            {data?.data[0]?.WeatherText}
+                        </h1>
+                        :
+                        <ErrorMessage 
+                            status={dataError?.message || "No data from the server"} 
+                            procedure={" Your data wasn't found :/ "}
+                        />
+                    }
                 </div>
                 <div className="data-box-forecast-wrapper">
-                {foreCastDataError === null && loading?
-                    <div className="data-box-forecast">
-                        {foreCastData.data[0]?.DailyForecasts?.map((day, index) => 
-                            <ForeCastMiniCard 
-                                key={index} 
-                                day={day.Date} 
-                                temp={
-                                    averageTempFormatter(
-                                        day.Temperature.Maximum.Value,
-                                        day.Temperature.Minimum.Value,
-                                        day.Temperature.Maximum.Unit
-                                    )
-                                }
+                    {foreCastDataError === null?
+                        <div className="data-box-forecast">
+                            {foreCastData.data?.DailyForecasts?.map((day, index) => 
+                                <ForeCastMiniCard 
+                                    key={index} 
+                                    day={day.Date} 
+                                    temp={
+                                        averageTempFormatter(
+                                            day.Temperature.Maximum.Value,
+                                            day.Temperature.Minimum.Value,
+                                            day.Temperature.Maximum.Unit
+                                        )
+                                    }
+                                />
+                            )}
+                        </div>
+                        :
+                        <div className='error-message-wrapper'>
+                            <ErrorMessage 
+                                status={foreCastDataError?.message || "No data from the server"} 
+                                procedure={"Your data wasn't found :/ "}
                             />
-                        )}
-                    </div>
-                    :
-                    <ErrorMessage 
-                        status={foreCastDataError?.message} 
-                        procedure={"Your data wasn't found, try to search again"}
-                    />
-                }
+                        </div>
+                    }
                 </div>
             </div>
             :

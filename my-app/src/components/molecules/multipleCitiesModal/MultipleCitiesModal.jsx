@@ -30,8 +30,9 @@ function MultipleCitiesModal({show, onHide, data, cityToSearch}) {
                     {data.map((country, index) => 
                         <MiniEnvelops 
                             key={index}
-                            data={country.cityCountry}
-                            envelopsKey={country.cityCountryKey}
+                            country={country.cityCountry}
+                            cityName={country.cityName}
+                            envelopsKey={country.cityKey}
                             handlingData={handlingData}
                         />
                     )}
