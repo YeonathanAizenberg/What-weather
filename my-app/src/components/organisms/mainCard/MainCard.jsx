@@ -13,7 +13,6 @@ function MainCard({data, foreCastData}) {
 
     const [isFavorite, setIsFavorite] = useState(false)
     const [dataLoaded, setDataLoaded] = useState(false)
-    const [weatherIcon, setWeatherIcon] = useState("https://apidev.accuweather.com/developers/Media/Default/WeatherIcons/36-s.png")
     const loading = useSelector(state => state?.getData.loading)
     const dataError = useSelector(state => state?.getData.error)
     const foreCastDataError = useSelector(state => state?.getForeCastData.error)
