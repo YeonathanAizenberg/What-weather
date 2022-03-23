@@ -1,8 +1,9 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
+import { metricImperialTempFormatter } from '../../../utils/Utils';
 import './CityMiniCard.css';
 
-function CityMiniCard({selectCard, removeCard, cityKey, city, temp, weather}) {
+function CityMiniCard({selectCard, removeCard, cityKey, city, weather, weatherUnit, temp }) {
 
     return (
         <div className='city-card'>
@@ -14,7 +15,7 @@ function CityMiniCard({selectCard, removeCard, cityKey, city, temp, weather}) {
                     {city}
                 </div>
                 <div>
-                    {temp}
+                    {metricImperialTempFormatter(temp, weatherUnit)}
                 </div>
             </div>
             <div>
