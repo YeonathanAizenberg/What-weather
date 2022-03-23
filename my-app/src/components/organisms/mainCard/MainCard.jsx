@@ -13,6 +13,7 @@ function MainCard({data, foreCastData}) {
 
     const [isFavorite, setIsFavorite] = useState(false)
     const [dataLoaded, setDataLoaded] = useState(false)
+    const [imperialTemp, setImperialTemp] = useState(false)
     const loading = useSelector(state => state?.getData.loading)
     const dataError = useSelector(state => state?.getData.error)
     const foreCastDataError = useSelector(state => state?.getForeCastData.error)
@@ -73,6 +74,9 @@ function MainCard({data, foreCastData}) {
                     <div className="data-box-header-city-data">
                         {dataError === null?
                             <div>
+                                <Button onClick={()=>setImperialTemp(!imperialTemp)}>
+                                    Toggle ºC to ºF
+                                </Button>
                                 <img src={settingIcon()} alt="weatherIcon"/>
                                 <div>
                                     {locationCityName}
@@ -80,10 +84,20 @@ function MainCard({data, foreCastData}) {
                                 <div className='temp-wrapper'>
                                     {data?.data.length !==0 ? 
                                         <div>
-                                            {metricImperialTempFormatter( 
-                                                data?.data[0]?.Temperature?.Metric?.Value, 
-                                                data?.data[0]?.Temperature?.Metric?.Unit 
-                                            )}
+                                            {imperialTemp ? 
+                                            <div>
+                                                {metricImperialTempFormatter( 
+                                                    data?.data[0]?.Temperature?.Imperial?.Value, 
+                                                    data?.data[0]?.Temperature?.Imperial?.Unit 
+                                                )}
+                                            </div>
+                                            :
+                                            <div>
+                                                {metricImperialTempFormatter( 
+                                                    data?.data[0]?.Temperature?.Metric?.Value, 
+                                                    data?.data[0]?.Temperature?.Metric?.Unit 
+                                                )}
+                                            </div>}
                                         </div>
                                         :
                                         <div>
@@ -125,15 +139,20 @@ function MainCard({data, foreCastData}) {
                 <div className="data-box-forecast-wrapper">
                     {foreCastDataError === null?
                         <div className="data-box-forecast">
-                            {foreCastData.data?.DailyForecasts?.map((day, index) => 
+                            {foreCastData.data[0]?.DailyForecasts?.map((day, index) => 
                                 <ForeCastMiniCard 
                                     key={index} 
                                     day={day.Date} 
-                                    temp={
+                                    temp={ imperialTemp ?
                                         averageTempFormatter(
                                             day.Temperature.Maximum.Value,
                                             day.Temperature.Minimum.Value,
-                                            day.Temperature.Maximum.Unit
+                                            "F"
+                                        ) :
+                                        averageTempFormatter(
+                                            Math.round(((day.Temperature.Maximum.Value - 32)* 5/9)),
+                                            Math.round(((day.Temperature.Minimum.Value - 32)* 5/9)),
+                                            "C"
                                         )
                                     }
                                 />

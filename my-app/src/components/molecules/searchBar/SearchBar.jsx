@@ -29,7 +29,7 @@ function SearchBar() {
     }
 
     const handlingSearch = (citiesArray) => {
-        console.log(citiesArray.data)
+
         if(citiesArray.data) {
             if(citiesArray.data?.length > 1) {
                 let moreThanOneCities = []
