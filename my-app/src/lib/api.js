@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const BaseURL = "https://dataservice.accuweather.com";
-const APIKey = "smEv22ZpcGcK1DASEG0nLJUBmfV0T4XI";
-const APIKeyNew = "WahwJP4BdD8l2dt8qr6O9QUtgbGcNL0v";
+const APIKeyNew = "smEv22ZpcGcK1DASEG0nLJUBmfV0T4XI";
+const APIKey = "WahwJP4BdD8l2dt8qr6O9QUtgbGcNL0v";
 var locationCode = localStorage.getItem("currentCityKey") ? localStorage.getItem("currentCityKey") : "215854"
 
 export function getCurrentWeather() {

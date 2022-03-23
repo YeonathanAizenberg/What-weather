@@ -19,7 +19,7 @@ export const dayFormatter = (day) => {
 
 export const averageTempFormatter = (maxTemp, minTemp, unit) => {
     const averageTemp = 
-    Math.trunc(Number(maxTemp) + Number(minTemp) / 2) 
+    Math.trunc((Number(maxTemp) + Number(minTemp)) / 2) 
     + 
     ` º${unit}`
     return averageTemp
