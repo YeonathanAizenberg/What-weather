@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { locationCompleteSearch } from '../../../lib/api';
 import { fetchSearchDataRequest, fetchSearchDataSuccess, fetchSearchDataError } from "../../../actions/searchData/action";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faSearch} from '@fortawesome/free-solid-svg-icons';
-import { Button, Spinner } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import MultipleCitiesModal from '../multipleCitiesModal/MultipleCitiesModal';
 import ErrorMessage from '../../atoms/errorMessage/ErrorMessage';
 import './SearchBar.css';
@@ -14,6 +14,7 @@ function SearchBar() {
     const [city,setCity] = useState("Tel Aviv");
     const [multipleCities,setMultipleCities] = useState([]);
     const [displayMultipleCitiesModal, setDisplayMultipleCitiesModal] = useState(false);
+    const searchData = useSelector(state => state?.getSearchData.data)
     const searchDataError = useSelector(state => state?.getSearchData.error)
 
     const searchCityWeatherInfo = () => {
@@ -21,23 +22,31 @@ function SearchBar() {
         locationCompleteSearch(city)
         .then(response => {
             dispatch(fetchSearchDataSuccess(response.data));
-            if(response?.data.length > 1) {
+            handlingSearch(response)
+        }).catch(error => {
+            dispatch(fetchSearchDataError(error));
+        })
+    }
+
+    const handlingSearch = (citiesArray) => {
+        console.log(citiesArray.data)
+        if(citiesArray.data) {
+            if(citiesArray.data?.length > 1) {
                 let moreThanOneCities = []
-                for(let i = 0; i < response?.data.length; i++) {
-                    const cityCountry = response.data[i].Country.LocalizedName
-                    const cityCountryKey = response.data[i].Key
-                    moreThanOneCities.push({cityCountry,cityCountryKey})  
+                for(let i = 0; i < citiesArray.data?.length; i++) {
+                    const cityCountry = citiesArray.data[i].Country.LocalizedName
+                    const cityName = citiesArray.data[i].LocalizedName
+                    const cityKey = citiesArray.data[i].Key
+                    moreThanOneCities.push({cityCountry,cityName,cityKey})  
                 }
                 setMultipleCities(moreThanOneCities)
                 setDisplayMultipleCitiesModal(true)
             } else {
-                localStorage.setItem("currentCityName", response?.data.Country.LocalizedName)
-                localStorage.setItem("currentCityKey", response?.data.Key)
+                localStorage.setItem("currentCityName", citiesArray.data[0]?.LocalizedName)
+                localStorage.setItem("currentCityKey", citiesArray.data[0]?.Key)
                 window.location.reload();
             }
-        }).catch(error => {
-            dispatch(fetchSearchDataError(error));
-        })
+        }
     }
 
     return (

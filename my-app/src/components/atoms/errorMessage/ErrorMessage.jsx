@@ -5,9 +5,13 @@ function ErrorMessage({status, procedure}) {
 
     return (
         <div className='error-message'>
-            <div>
-                Error Type: <u>{status}</u>
-            </div>
+            {status ? 
+                <div>
+                    Error Type: <u>{status}</u>
+                </div>
+                :
+                null
+            }
             <div>
                 {procedure}
             </div>
