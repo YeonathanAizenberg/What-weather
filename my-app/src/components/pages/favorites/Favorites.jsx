@@ -25,9 +25,12 @@ const Favorites = () => {
 
     return (
         <div>
+            {favCitiesParse().length !== 0 ? 
             <Button onClick={()=>setImperialTemp(!imperialTemp)}>
                 Toggle ºC to ºF
             </Button>
+            : 
+                null}
             <div className="fav-city-cards-wrapper">
                 {favCitiesParse().length !== 0 ? 
                     favCitiesParse()?.map((city, index) =>

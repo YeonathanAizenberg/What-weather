@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { locationCompleteSearch } from '../../../lib/api';
 import { fetchSearchDataRequest, fetchSearchDataSuccess, fetchSearchDataError } from "../../../actions/searchData/action";
@@ -14,7 +14,6 @@ function SearchBar() {
     const [city,setCity] = useState("Tel Aviv");
     const [multipleCities,setMultipleCities] = useState([]);
     const [displayMultipleCitiesModal, setDisplayMultipleCitiesModal] = useState(false);
-    const searchData = useSelector(state => state?.getSearchData.data)
     const searchDataError = useSelector(state => state?.getSearchData.error)
 
     const searchCityWeatherInfo = () => {

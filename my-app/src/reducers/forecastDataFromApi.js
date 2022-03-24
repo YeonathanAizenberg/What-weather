@@ -5,7 +5,6 @@ let initialState = {
 };
 
 const forecastDataFromApi = (state = initialState, action) => {
-    var { data } = state;
 
     switch (action.type) {
         case "FETCH_FORECAST_DATA_REQUEST":

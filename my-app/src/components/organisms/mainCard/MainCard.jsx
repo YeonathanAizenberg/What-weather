@@ -47,7 +47,7 @@ function MainCard({data, foreCastData}) {
 
     useEffect(
         () => {
-            loading == true ? 
+            loading === true ? 
             setDataLoaded(false) : setDataLoaded(true)
         },
         [loading],
@@ -77,7 +77,7 @@ function MainCard({data, foreCastData}) {
                                 <Button onClick={()=>setImperialTemp(!imperialTemp)}>
                                     Toggle ºC to ºF
                                 </Button>
-                                <img src={settingIcon()} alt="weatherIcon"/>
+                                {data?.data.length !== 0? <img src={settingIcon()} alt="weatherIcon"/> : null}
                                 <div>
                                     {locationCityName}
                                 </div>
@@ -139,19 +139,19 @@ function MainCard({data, foreCastData}) {
                 <div className="data-box-forecast-wrapper">
                     {foreCastDataError === null?
                         <div className="data-box-forecast">
-                            {foreCastData.data[0]?.DailyForecasts?.map((day, index) => 
+                            {foreCastData.data?.DailyForecasts?.map((day, index) => 
                                 <ForeCastMiniCard 
                                     key={index} 
                                     day={day.Date} 
                                     temp={ imperialTemp ?
                                         averageTempFormatter(
-                                            day.Temperature.Maximum.Value,
-                                            day.Temperature.Minimum.Value,
+                                            (day.Temperature.Maximum.Value * 9/5)+ 32,
+                                            (day.Temperature.Minimum.Value * 9/5)+ 32,
                                             "F"
                                         ) :
                                         averageTempFormatter(
-                                            Math.round(((day.Temperature.Maximum.Value - 32)* 5/9)),
-                                            Math.round(((day.Temperature.Minimum.Value - 32)* 5/9)),
+                                            day.Temperature.Maximum.Value,
+                                            day.Temperature.Minimum.Value,
                                             "C"
                                         )
                                     }

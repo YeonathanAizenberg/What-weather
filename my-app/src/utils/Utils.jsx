@@ -19,7 +19,7 @@ export const dayFormatter = (day) => {
 
 export const averageTempFormatter = (maxTemp, minTemp, unit) => {
     const averageTemp = 
-    Math.trunc(Number(maxTemp) + Number(minTemp) / 2) 
+    Math.trunc((Number(maxTemp) + Number(minTemp)) / 2) 
     + 
     ` º${unit}`
     return averageTemp
@@ -31,37 +31,37 @@ export const metricImperialTempFormatter = (temp, unit) => {
 }
 
 export const removeFromLocalStore = (cardCityKey) => {
-    if(favoriteCitiesOne?.cityKey == cardCityKey) {
+    if(favoriteCitiesOne?.cityKey === cardCityKey) {
         localStorage.removeItem("favCityOne");
     } 
-    if(favoriteCitiesTwo?.cityKey == cardCityKey) {
+    if(favoriteCitiesTwo?.cityKey === cardCityKey) {
         localStorage.removeItem("favCityTwo");
     } 
-    if(favoriteCitiesThree?.cityKey == cardCityKey) {
+    if(favoriteCitiesThree?.cityKey === cardCityKey) {
         localStorage.removeItem("favCityThree");
     } 
-    if(favoriteCitiesFour?.cityKey == cardCityKey) {
+    if(favoriteCitiesFour?.cityKey === cardCityKey) {
         localStorage.removeItem("favCityFour");
     } 
-    if(favoriteCitiesFive?.cityKey == cardCityKey) {
+    if(favoriteCitiesFive?.cityKey === cardCityKey) {
         localStorage.removeItem("favCityFive");
     }
 }
 
 export const checkIfCityIsFavorite = (locationCityKey) => {
-    if(favoriteCitiesOne?.cityKey == locationCityKey) {
+    if(favoriteCitiesOne?.cityKey === locationCityKey) {
         return true
     } 
-    if(favoriteCitiesTwo?.cityKey == locationCityKey) {
+    if(favoriteCitiesTwo?.cityKey === locationCityKey) {
         return true
     } 
-    if(favoriteCitiesThree?.cityKey == locationCityKey) {
+    if(favoriteCitiesThree?.cityKey === locationCityKey) {
         return true
     } 
-    if(favoriteCitiesFour?.cityKey == locationCityKey) {
+    if(favoriteCitiesFour?.cityKey === locationCityKey) {
         return true
     } 
-    if(favoriteCitiesFive?.cityKey == locationCityKey) {
+    if(favoriteCitiesFive?.cityKey === locationCityKey) {
         return true
     }
 }

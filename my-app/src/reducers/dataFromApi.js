@@ -5,7 +5,7 @@ let initialState = {
 };
 
 const dataFromApi = (state = initialState, action) => {
-    var {data} = state;
+
     switch (action.type) {
         case "FETCH_DATA_REQUEST":
             return {
