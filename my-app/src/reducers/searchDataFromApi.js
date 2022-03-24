@@ -5,7 +5,6 @@ let initialState = {
 };
 
 const searchDataFromApi = (state = initialState, action) => {
-    var { data } = state;
 
     switch (action.type) {
         case "FETCH_SEARCH_DATA_REQUEST":

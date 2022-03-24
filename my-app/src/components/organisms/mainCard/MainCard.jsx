@@ -47,7 +47,7 @@ function MainCard({data, foreCastData}) {
 
     useEffect(
         () => {
-            loading == true ? 
+            loading === true ? 
             setDataLoaded(false) : setDataLoaded(true)
         },
         [loading],
@@ -77,7 +77,7 @@ function MainCard({data, foreCastData}) {
                                 <Button onClick={()=>setImperialTemp(!imperialTemp)}>
                                     Toggle ºC to ºF
                                 </Button>
-                                <img src={settingIcon()} alt="weatherIcon"/>
+                                {data?.data.length !== 0? <img src={settingIcon()} alt="weatherIcon"/> : null}
                                 <div>
                                     {locationCityName}
                                 </div>
