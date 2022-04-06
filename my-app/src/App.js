@@ -8,7 +8,7 @@ import './App.css';
 function App() {
 
   return (
-    <div className="App">
+    <div className="App" style={{backgroundImage: `url(weatherImage.jpg)` }}>
       <Router>
         <NavBar />
         <Routes>
